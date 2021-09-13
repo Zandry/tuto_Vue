@@ -1,4 +1,4 @@
-`Vue.js` est un framework (ensemble d'outil) en javascript qui permet de développer des interfaces web interactifs. 
+`Vue.js` est un framework (ensemble d'outil) en javascript qui permet de développer des interfaces web très interactifs. 
 
 # I. Installation de Vue.js
 L'installation peut se faire:
@@ -23,4 +23,14 @@ Allez sur le site https://vuejs.org/v2/guide/installation.html et choisir la ver
 ![](images/installation_dev_version.png)
 
 
+# II. Las manières d'utiliser Vue
+Globalenemnt, on peut utiliser `Vue` de 2 manières:
+- pour contrôler des parties de pages (seulement des petits bouts de la page). Par exemple pour le rendre interactif mais que le reste du site reste comme avant.
+
+![](images/fonctionnement_vue.png)
+
+- pour contrôler toute une page. Cette approche consiste à contrôler toute une page avec Vue et donc Vue sert à envoyer des éléments à cette page. En général c'est une page unique qu'on met à jour (d'où son nom de `Single Page Application`). Dans ce cas, c'est le code qu'on crée avc `Vue.js` qui définit ce qui est rendue dans la page
+![](images/fonctionnement_vue2.png)
+
+Dans tout le cours, nous allons travailler les 2 approches.
 
