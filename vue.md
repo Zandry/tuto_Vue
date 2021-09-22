@@ -34,7 +34,14 @@ Globalenemnt, on peut utiliser `Vue` de 2 manières:
 
 Dans tout le cours, nous allons travailler les 2 approches.
 
+# III. Première applcation en Javascript
+L'application que nous allons developper en premier est une application simple qui permet de rajouter un élément à une liste d'objectif. Cette application nous permettra d'avoir un petit projet simple pour commencer.
 
+La maquette de ce projet est comme suit:
+
+
+
+Pour cela, nosu 
 
 
 
