@@ -23,7 +23,7 @@ Allez sur le site https://vuejs.org/v2/guide/installation.html et choisir la ver
 ![](images/installation_dev_version.png)
 
 
-# II. Las manières d'utiliser Vue
+# II. Les manières d'utiliser Vue
 Globalenemnt, on peut utiliser `Vue` de 2 manières:
 - pour contrôler des parties de pages (seulement des petits bouts de la page). Par exemple pour le rendre interactif mais que le reste du site reste comme avant.
 
@@ -33,4 +33,9 @@ Globalenemnt, on peut utiliser `Vue` de 2 manières:
 ![](images/fonctionnement_vue2.png)
 
 Dans tout le cours, nous allons travailler les 2 approches.
+
+
+
+
+
 
