@@ -91,7 +91,10 @@ Dans le fichier `index.html`, nous avons ceci (dans lequel je vais insérer des 
 Le fichier `style.css` contient le contenu suivant (que je vais commenter pour faciliter l'explication)
 
 ```css
-/*ce bout de code permet d'initialiser le box model de notre projet (pour tous les éléments). Les propriétés 'width' et 'height' incluent le contenu, le remplissage (padding), la bordure, mais pas la marge.*/
+/*ce bout de code permet d'initialiser le box model 
+de notre projet (pour tous les éléments). Les propriétés 'width' et 'height' incluent le contenu, 
+le remplissage (padding), la bordure, mais pas la marge.
+*/
 * {
   box-sizing: border-box;
 }
@@ -101,14 +104,16 @@ html {
   font-family: sans-serif;
 }
 
-/* la marge du corps sera 0 
-margin avec un seul argument définit les marges des 4 côtés à 0*/
+/* la marge du corps sera 0 margin avec un seul
+argument définit les marges des 4 côtés à 0*/
 body {
   margin: 0;
 }
 
-/* définition du margin, du max-width (largeur max) et du padding du div app 
-Rappel sur l'unité px, em, % et rem https://grafikart.fr/tutoriels/font-size-rem-em-px-477 (à lire - très important)
+/* définition du margin, du max-width (largeur max) et
+du padding du div app 
+Rappel sur l'unité px, em, % et rem (https://grafikart.fr/tutoriels/font-size-rem-em-px-477
+ ( à lire - très important)
 */
 #app {
   margin: 3rem auto;
@@ -159,3 +164,5 @@ Avec ces css, nous obtenons l'IHM ci-dessous quand on lance `index.html`
 
 ![](images/ihm1.png) - presque la même chose que dans la maquette.
 
+
+Maintenant que nous avons compris ce qu'on a, nous allons 

@@ -1,0 +1,3 @@
+[submodule "vue-orgchart"]
+	path = vue-orgchart
+	url = ../../dabeng/vue-orgchart.git
