@@ -34,7 +34,7 @@ Globalenemnt, on peut utiliser `Vue` de 2 manières:
 
 Dans tout le cours, nous allons travailler les 2 approches.
 
-# III. Première applcation en Javascript
+# III. Première application en Javascript
 L'application que nous allons developper en premier est une application simple qui permet de rajouter un élément à une liste d'objectif. Cette application nous permettra d'avoir un petit projet simple pour commencer.
 
 La maquette de ce projet est comme suit:
@@ -164,6 +164,7 @@ Avec ces css, nous obtenons l'IHM ci-dessous quand on lance `index.html`
 
 ![](images/ihm1.png) - presque la même chose que dans la maquette.
 
+## III.1 Javascript sans Vue
 
 Maintenant que nous avons compris ce qu'on a, nous allons le coder (pour l'instant sans Vue)
 
@@ -204,4 +205,19 @@ Maintenant que nous avons compris ce qu'on a, nous allons le coder (pour l'insta
   ```js
     buttonEl.addEventListener('click')
   ```
-Tester.
+Tester. 
+
+Si tout se passe bien, vous devriez avoir un programme qui rajoute à chaque fois le texte que vous tapez dans la liste, comme ceci:
+
+![](images/demo_proj1.png)
+
+Toute fois, il manque un dernier petit truc, ilfaut effacer l'inputbox quand on a cliqué sur le bouton pour qu'on puisse entrer le nouveau texte sur une zone de texte propre. Pour cela, dans le code de la fonction, rajouter juste à la fin:
+
+
+```js
+  // on force le contenu de l'input à une valeur vide (même pas un espace)
+  inputEl.value="";
+```
+retester et vous avez fini ce petit projet (pour l'instant sans vue.js) 
+
+Dans le prochain étape, nous allons refaire le même petit projet avec Vue pour vous montrer les avantages de Vue.

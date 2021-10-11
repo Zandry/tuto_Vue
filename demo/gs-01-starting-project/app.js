@@ -14,6 +14,8 @@ function addGoal()
     listLiElement.textContent = enteredValue;
     //enfin nous allons placer l'élément listLiElement dans la list <ul> listEl
     listEl.appendChild(listLiElement); 
+    // effacer l'inputbox
+    inputEl.value="";
 }
 
 buttonEl.addEventListener("click", addGoal);
