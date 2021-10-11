@@ -165,4 +165,43 @@ Avec ces css, nous obtenons l'IHM ci-dessous quand on lance `index.html`
 ![](images/ihm1.png) - presque la même chose que dans la maquette.
 
 
-Maintenant que nous avons compris ce qu'on a, nous allons 
+Maintenant que nous avons compris ce qu'on a, nous allons le coder (pour l'instant sans Vue)
+
+- selectionner le seul bouton avec `querySelector`:
+  ```js
+    const buttonEl = document.querySelector('button');
+  ```
+- selectionner la seule `input` dans le document.
+  ```js
+    const inputEl = document.querySelector('input');
+  ```
+- selectionner également la liste dans lequel nous allons rajouter les "objectifs".
+  ```js
+    const listEl = document.querySelector('ul');
+  ```
+- Rajouter une fonction `addGoal` qui nous sera notre `callback` quand le bouton sera clické.
+  ```js
+    function addGoal()
+    {
+
+    }
+  ```
+- Dans cette fonction, nous allons mettre le traitement que nous devons faire (en l'occurrence rajouter l'élément dans la liste)
+  ```js
+      //récupérer l'input
+      const enteredValue = inputEl.value;
+      // nous allons créer le nouvel élément comme suit <li>enteredValue</li> et nous allons rajouter 
+      // tout cela texte dans l'élément selectionné avec le <ul> (la variable listEl)
+      // pour la création, on peut utiliser createElement de javascript pour créer un élément.
+      const listLiElement = document.createElement('li');
+      // nous allons ensuite définir le contenu text dans cet élément nouvellement créée
+      listLiElement.textContent = enteredValue;
+      //enfin nous allons placer l'élément listLiElement dans la list <ul> listEl
+      listEl.appendChild(listLiElement); 
+
+  ```
+- On peut maintenant rajouter un event `click` au bouton.
+  ```js
+    buttonEl.addEventListener('click')
+  ```
+Tester.
