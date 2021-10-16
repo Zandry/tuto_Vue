@@ -221,3 +221,195 @@ Toute fois, il manque un dernier petit truc, ilfaut effacer l'inputbox quand on 
 retester et vous avez fini ce petit projet (pour l'instant sans vue.js) 
 
 Dans le prochain étape, nous allons refaire le même petit projet avec Vue pour vous montrer les avantages de Vue.
+
+## III.1 Le même projet avec Vue
+Nous allons recoder le même projet avec Vue.
+Reprenez la même base de code et commentez tout dans le fichier `app.js`. 
+Ensuite, nous allons aller sur le site https://v3.vuejs.org/guide/installation.html#vue-devtools 
+(si vous souhaitez utiliser Vue2, alors utilisez ce lien https://vuejs.org/v2/guide/installation.html) et chercher le paragraphe `#CDN`. et nous allons récupérer le code dans cdn :
+
+![](images/cdn_vue.png)
+
+et le coller dans le fichier `index.html` pour avoir `vue.js` dans notre code (comme ci-dessous).
+La version que vous avez peut ne pas être la même mais ce n'est pas grave. 
+Pour l'instant, nous allons utiliser `Vue3`, vous pourrez utiliser le lien ci-dessous.
+
+```html
+  <script src="https://unpkg.com/vue@next"></script>
+   <script src="app.js"></script>
+```
+
+Maintenant que nous avons compris ce qu'on a fait auparavant, nous allons comment le faire avec `Vue`.
+
+Nous remarquons qu'actuellement, le code html contient une liste d'obectifs en dur:
+
+```html
+ <ul>
+    <li>Test</li>
+ </ul>
+```
+Pour chaque click sur le bouton, nous allons rajouter une nouvelle balise `<li>...</li>` afin de rajouter l'objectif dans la liste. On le fera au début en Javascript pur.
+L'algorithme sera la suivante:
+- récupérer le texte saisie dans la zone `input`.
+- rajouter un texte avec une balise `<li>` dans la partie `<ul>` du code html.
+
+Pour cela, nous devons avoir accès aux champs:
+- `<input>` pour récupérer ce qu'il contient,  
+- `<button>` pour pouvoir lui attacher un évènement
+- `<ul>` pour pouvoir rajouter des éléments dedans.
+
+Pour cela, nous allons déjà commencer par créer quelques constantes en Javascript qui contiendront les éléments qui nous permettront de travailler.
+
+Qu'est-ce qui change? 
+Nous avons tout d'abord besoin de créer une application `Vue` 
+- la création de l'application
+  ```js
+    Vue.createApp({});
+  ```
+- cette application peut prendre un objet javasdcript en argument (qu'on fournit entre accolade)
+  ```js
+  {
+    data:
+  }
+  ```
+  En fait,  on définit comme `data` dans l'objet Vue, tout ce qui sera manipulé. le nom doit être ` data` (et pas autre chose). Dans notre cas, nous allons avoir besoin de la liste des objectifs, et nous allons avoir besoin de la zone de texte que l'utilisateur a entré.
+
+- Dans la réalité, `data` est une fonction qui retournera des données (les données que nous allons manipuler)
+
+```js
+{
+  // on peut aussi écrire data= function() {}
+  data(){
+    //la fonction doit retourner un/des objets
+    // nous allons retourner les données que notre application doit manipuler.
+    // nous allons voir cela de plus près dans les chapitres suivants.
+    // l'instant, nous allons mettre notre liste d'objectif (qui est initialement un tableau vide)
+    return {
+      goals:[],
+      // et également la valeur entrée enteredValue (qui est une chaine vide initialement)
+      entedValue:""
+    }
+  }
+}
+```
+ce qui est important à comprendre est que les données mises dans cet objet est dans le scope de Vue (`Vue` les voit et peut les manipuler)
+
+- Pour connecter la partie html à `Vue`, nous pourrons utiliser des `directives` (ce sont des attributs html spécifiques)
+Pour notre `input` par exemple, nous pourrons utiliser la directive `v-model="nom_model"` (nous allons voir cela plusieurs fois dans la suite mais ici c'est juste pour montrer les capabilités de `Vue`). Pour lier le code `Vue` au code html, nous allons donner comme nom de model de l'input, le nom de la variable qu'on a souhaité associer à l'input dans le code `Vue` (pour notre cas, c'est `enteredValue`).
+Le code HTML de l'input devient alors comme suit
+```html
+  <input type="text" id="goal" v-model="enteredValue"/>
+```
+Cela permettra d'établir une connexion entre la donnée que nous allons entrer dans la zone de texte manuellement, et la propriété `enteredValue` dans la donnée `data` dans le code `Vue`. `Vue` va automatiquement "gérer" la variable pour nous (il va automatiquement "écouter" ce qui est entré dans la zone et mettre à jour en temps réel la valeur de la variable `enteredValue`) 
+
+- pour les actions à faire: nous souhaitons prendre ce qui est mis dans `enterValue` (quand on click sur le bouton) et le rajouter à la liste `goals` (qui, comme on le voit est aussi dans la `data`).
+Pour les actions, nous pouvons rajouter dans la méthode `createApp`, une nouvelle donnée appelé `methods` comme ci-dessous. Nous pourrons alors rajouter dans l'objet javascript ` methods` des méthodes et des fonctions qui peuvent être appelés à partir du code html. Ci-dessous également, dans le code nous avons alors rajouter la méthode ` addGoal()` (lire le commentaire).
+
+Attention: Si vous voulez utiliser Vue3 alors, le code ci-dessous est valable avec `createApp`
+
+```js
+Vue.createApp({
+  data() {
+    //la fonction doit retourner un/des objets
+    // nous allons retourner les données que notre application doit manipuler.
+    // nous allons voir cela de plus près dans les chapitres suivants.
+    // l'instant, nous allons mettre notre liste d'objectif (qui est initialement un tableau vide)
+    return {
+      goals:[],
+      // et également la valeur entrée enteredValue (qui est une chaine vide initialement)
+      entedValue:""
+    }
+  },
+  methods:{
+    addGoal(){
+      //si nous utilisons une donnée dans data, on doit utiliser this (pour dire que c'est une donnée de data). Cela permettra à `Vue` d'établir la connexion en backend.
+      this.goals.push(this.enteredValue);
+    }
+  }
+}).mount('#app');
+```
+*** Si vous voulez utiliser Vue2 ***
+Si toutefois, vous vous interessez à `Vue2`, createApp ne fonctionnera pas car vous aurez alors des problèmes de message d'erreur du type:
+
+```sh
+
+```
+
+Pour `Vue2`, il faut utiliser le code suivant. Ne pas oublier la propriété `el` qui spécifie l'identifiant `html` que doit contrôler `Vue` (il doit s'appeler `el` et pas autre chose):
+
+```js
+new Vue({
+    el: "#app",
+    data(){
+
+        //la fonction doit retourner un/des objets
+        // nous allons retourner les données que notre application doit manipuler.
+        // nous allons voir cela de plus près dans les chapitres suivants.
+        // l'instant, nous allons mettre notre liste d'objectif (qui est initialement un tableau vide)
+        return {
+            goals:[],
+            // et également la valeur entrée enteredValue (qui est une chaine vide initialement)
+            enteredValue:""
+        }
+    },
+    methods:{
+        addGoal(){
+          //si nous utilisons une donnée dans data, on doit utiliser this (pour dire que c'est une donnée de data). Cela permettra à `Vue` d'établir la connexion en backend.
+          this.goals.push(this.enteredValue);
+        }
+      }
+});
+```
+Ne pa oublier le lien html `<script>` pour pointer vers `Vue2`
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+```
+
+- Maintenant, nous souhaitons relier le code html avec cette fonction de manière à que chaque fois que le bouton est cliqué alors`addGoal` est executé. Comment fait-on? Là encore, très facile: on utilise la directive `v-on:evenement="nom_fonction"` (ex: `v-on:click="addGoal"`). Et il faut mettre cette directive en tant qu'attribut du code html du button pour que l'évènement (ici `click`) du bouton soit opérationnel. Le code sera comme suit:
+```html
+...
+...
+  <button v-on:click="addGoal">Add Goal</button>
+```
+Pour le tester, modifier le code dans la fonction `addGoal()` par un simple ` alert("test");` et en cliquant sur le bouton, on devrait avoir une alerte.
+Après le test, remettez le code de `addGoal` comme avant.
+
+- dernière chose, maintenant, il faut coder la partie du code qui rajoute les list `<li>` car pour l'instant, nous les rajoutons dans la variable `goals` mais rien de plus. Pour l'afficher, il faut rajouter une liste `<li>` pour chaque élément dans `goals`. Comment fait-on cela? Nous allons utiliser la directive `v-for` sur l'élément `<li>`. 
+
+En gros, nous avons déjà la list `<ul>` et dedans pour chaque `goal`(un élément) dans `goals`, nous souhaitons créer une liste `<li>` 
+
+```html
+ ...
+ <ul>
+   <li v-for="goal in goals">{{ goal }}</li>
+ </ul>
+```
+
+A ce stade ça ne fonctionne pas encore. Nous obtenons l'affichage suivant:
+
+![](images/bad_display.png)
+
+Il nous manque juste une toute petite chose. Nous avons créer l'instance de `Vue` dans `app.js` mais nous n'avons pas spécifier sur quelle partie de la page `Vue` doit s'executer. C'est ce qui cause l'erreur.  Nous devons spécifier à `Vue` qu'il doit prendre en charge la balise `div` avec un id `app`. 
+
+Le problème n'apparaît que pour  la version `Vue3`, il faut juste rajouter le bout de code suivant pour la version `Vue3`:
+```js
+Vue.createApp({
+  ....
+}).mount('#app');
+```
+
+Codez cela et comparez avec le code dans le commit suivant.
+
+Une dernière petite chose: 
+- quand on  cliqué sur le bouton, il faut ensuite effacer le contenu de la zone de texte afin que l'ancien texte n'y reste pas. Donc, nous allons rajouter ce bout de code dans la fonction `addGoal()`
+```js
+ addGoal(){
+   ...
+   ...
+   this.entedValue="";
+  }
+```
+
+Vous obtiendrez alors ceci:
+![](images/finished_p1_vue.png)
+
